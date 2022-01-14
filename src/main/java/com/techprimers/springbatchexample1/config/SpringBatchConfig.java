@@ -54,11 +54,11 @@ public class SpringBatchConfig {
     @StepScope
     public FlatFileItemReader<User> itemReader(@Value("file:///#{jobParameters['input.file.path']}") Resource resource) throws IOException {
 
-        System.out.println("resource filepath is "+ resource.getURL());
+        System.out.println("resource filepath is "+ String.valueOf(resource.getURL()).substring(6));
 
         FlatFileItemReader<User> flatFileItemReader = new FlatFileItemReader<>();
-        flatFileItemReader.setResource(new FileSystemResource("/source/users.csv"));
-//        flatFileItemReader.setResource(new FileSystemResource(String.valueOf(resource.getURL())));
+//        flatFileItemReader.setResource(new FileSystemResource("source/users.csv"));
+        flatFileItemReader.setResource(new FileSystemResource(String.valueOf(resource.getURL()).substring(6)));
 //        flatFileItemReader.setResource(resource);
         flatFileItemReader.setName("CSV-Reader");
         flatFileItemReader.setLinesToSkip(1);

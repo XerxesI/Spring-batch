@@ -56,6 +56,8 @@ public class SpringBatchConfig {
 
         System.out.println("resource filepath is "+ String.valueOf(resource.getURL()).substring(6));
 
+// try out regular expression tro move all characters until /  ("(/-(.+)/)");
+
         FlatFileItemReader<User> flatFileItemReader = new FlatFileItemReader<>();
 //        flatFileItemReader.setResource(new FileSystemResource("source/users.csv"));
         flatFileItemReader.setResource(new FileSystemResource(String.valueOf(resource.getURL()).substring(6)));

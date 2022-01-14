@@ -24,6 +24,8 @@ import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 
+import static com.techprimers.springbatchexample1.util.ValidationConstraint.FILEPATH_REGEXP;
+
 @Configuration
 @EnableBatchProcessing
 public class SpringBatchConfig {
@@ -55,13 +57,12 @@ public class SpringBatchConfig {
     public FlatFileItemReader<User> itemReader(@Value("file:///#{jobParameters['input.file.path']}") Resource resource) throws IOException {
 
         System.out.println("resource filepath is "+ String.valueOf(resource.getURL()).substring(6));
-
-// try out regular expression tro move all characters until /  ("(/-(.+)/)");
+        System.out.println("regex filepath is " + String.valueOf(resource.getURL()).replaceAll(FILEPATH_REGEXP, ""));
 
         FlatFileItemReader<User> flatFileItemReader = new FlatFileItemReader<>();
-//        flatFileItemReader.setResource(new FileSystemResource("source/users.csv"));
-        flatFileItemReader.setResource(new FileSystemResource(String.valueOf(resource.getURL()).substring(6)));
-//        flatFileItemReader.setResource(resource);
+//      flatFileItemReader.setResource(new FileSystemResource("source/users.csv"));
+        flatFileItemReader.setResource(new FileSystemResource(String.valueOf(resource.getURL()).replaceAll(FILEPATH_REGEXP, "")));
+//      flatFileItemReader.setResource(resource);
         flatFileItemReader.setName("CSV-Reader");
         flatFileItemReader.setLinesToSkip(1);
         flatFileItemReader.setLineMapper(lineMapper());

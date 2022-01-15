@@ -29,6 +29,7 @@ public class LoadController {
 
         Map<String, JobParameter> maps = new HashMap<>();
         maps.put("time", new JobParameter(System.currentTimeMillis()));
+        maps.put("input.file.path", new JobParameter("src/main/resources/users5.csv"));
         JobParameters parameters = new JobParameters(maps);
         JobExecution jobExecution = jobLauncher.run(job, parameters);
 

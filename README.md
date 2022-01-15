@@ -9,6 +9,9 @@ https://github.com/TechPrimers/spring-batch-example-1
 - `sa` - User
 - `password` - Password.
 
+# Regexp example I found from this web page
+https://stackoverflow.com/questions/2013124/regex-matching-up-to-the-first-occurrence-of-a-character
+
 ## H2 db selects
 select * from user;
 select * from BATCH_JOB_EXECUTION;
